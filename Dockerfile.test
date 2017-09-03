@@ -1,0 +1,10 @@
+# TODO: change to use artifactory URL
+FROM openjdk:8
+MAINTAINER DOF <Ojewale.Olusegun.external@ynap.com>
+
+WORKDIR /configuration
+ADD . $WORKDIR
+
+#CMD ["java",  "-jar", "lib/json-schema-validator.jar lib/schema.json config/man*.json"]
+#ENTRYPOINT [ "java", "-jar", "/configuration/lib/json-schema-validator.jar", "/configuration/lib/schema.json","/configuration/config/configuration.json" ]
+CMD ["bash", "/configuration/bin/validate.sh"]
