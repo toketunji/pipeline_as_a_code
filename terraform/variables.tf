@@ -3,8 +3,8 @@
 ########################
 
 #Basic connection information
-variable "access_key"           {}  
-variable "secret_key"           {} 
+#variable "access_key"           {}  
+#variable "secret_key"           {} 
 variable "region"               { default  = "eu-west-1" } 
 variable "azs"                  { default = { "eu-west-1"  = "a,b"} }
 

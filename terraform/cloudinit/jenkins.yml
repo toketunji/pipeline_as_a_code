@@ -20,7 +20,7 @@ runcmd:
   - 'sudo service jenkins start && sudo service docker start  && echo "All is well! :-)"'
   - 'sleep 120'
   - 'cd /tmp'
-  - curl -O http://127.0.0.1:8080/jnlpJars/jenkins-cli.jar && pass=`sudo cat /var/lib/jenkins/secrets/initialAdminPassword` && echo 'jenkins.model.Jenkins.instance.securityRealm.createAccount("${login_user}","${login_password}")' | sudo java -jar jenkins-cli.jar -auth admin:$pass -s http://localhost:8080/ groovy = 
+  - curl -O http://127.0.0.1:8080/jnlpJars/jenkins-cli.jar && pass=`sudo cat /var/lib/jenkins/secrets/initialAdminPassword` && echo 'jenkins.model.Jenkins.instance.securityRealm.createAccount("tech-user","tech-pass")' | sudo java -jar jenkins-cli.jar -auth admin:$pass -s http://localhost:8080/ groovy = 
   - 'echo "services are now running'
 final_message: "The system is up, after $UPTIME seconds"
 
