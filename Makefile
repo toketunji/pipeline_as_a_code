@@ -1,5 +1,5 @@
 .PHONY: all
-all: deploy-test
+all: deploy-app
 
 # When run locally DOCKER_TAG won't be set so we should create it
 # When run in Jenkins the Jenkinsfile defines this appropriately
@@ -11,5 +11,11 @@ endif
 #AWS_ACCESS_KEY = AKIAJHQROJMAN6ILEE5Q
 #AWS_SECRET_KEY = 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
 
-deploy-test: setup
-	echo "hello world"
+build-app: setup
+	echo "build world"
+
+test-app: setup
+	echo "test world"
+
+deploy-app: setup
+	echo "deploy world"

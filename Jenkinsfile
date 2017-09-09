@@ -16,7 +16,7 @@ node {
     checkout scm
 
     // Run the Makefile steps
-    sh 'make deploy-test'
+    sh 'make'
   }
 }
 
