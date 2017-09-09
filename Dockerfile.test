@@ -1,4 +1,4 @@
-# TODO: change to use artifactory URL
+# TODO: change to use artifactory URL  
 FROM openjdk:8
 MAINTAINER DOF <Ojewale.Olusegun.external@ynap.com>
 
