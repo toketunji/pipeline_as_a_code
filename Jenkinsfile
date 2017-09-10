@@ -24,5 +24,11 @@ node {
     // Run the Makefile steps
     sh 'make test-app'
   }
+  stage('deploy') {
+    checkout scm
+
+    // Run the Makefile steps
+    sh 'make deploy-app'
+  }
 }
 
