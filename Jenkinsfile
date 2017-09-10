@@ -16,13 +16,13 @@ node {
     checkout scm
 
     // Run the Makefile steps
-    sh 'make'
+    sh 'make build-app'
   }
   stage('test') {
     checkout scm
 
     // Run the Makefile steps
-    sh 'make'
+    sh 'make test-app'
   }
 }
 
