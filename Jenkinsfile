@@ -12,7 +12,13 @@ env.DOCKER_TAG = BUILD_TAG.toLowerCase()
 node {
   // Checkout the repository branch/tag/commit which triggered this job into the
   // Jenkins node workspace
-  stage('Test') {
+  stage('Build') {
+    checkout scm
+
+    // Run the Makefile steps
+    sh 'make'
+  }
+  stage('test') {
     checkout scm
 
     // Run the Makefile steps
