@@ -1,0 +1,10 @@
+# TODO: change to use artifactory URL
+FROM freedomkk/tomcat-maven
+MAINTAINER OLU <shegoj@yahoo.com>
+
+WORKDIR /configuration
+ADD app $WORKDIR
+
+CMD ["bash", "/configuration/bin/build.sh"]
+
+

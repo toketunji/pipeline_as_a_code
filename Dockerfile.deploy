@@ -1,7 +1,0 @@
-FROM docker.artifactory.yoox.net/amazonlinux-awscli
-#FROM garland/aws-cli-docker
-MAINTAINER DOF <Ojewale.Olusegun.external@ynap.com>
-
-WORKDIR /configuration
-ADD . $WORKDIR
-CMD ["sh", "/configuration/bin/deploy.sh"]

@@ -1,0 +1,1 @@
+echo "App test successful"

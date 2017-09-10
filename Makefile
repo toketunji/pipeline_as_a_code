@@ -19,3 +19,14 @@ test-app: setup
 
 deploy-app: setup
 	echo "deploy world"
+
+
+
+app-docker-build: setup
+	docker build -f Dockerfile.test -t $(DOCKER_TAG) 
+	docker run --rm $(DOCKER_TAG)
+
+
+app-docker-test: setup
+	docker build -f Dockerfile.test -t $(DOCKER_TAG) 
+	docker run --rm $(DOCKER_TAG)

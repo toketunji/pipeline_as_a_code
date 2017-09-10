@@ -1,0 +1,8 @@
+<html>
+<body>
+<h1>Maven + Spring MVC Web Project Example</h1>
+
+<h2>Message : Welcome mkyong</h2>
+<h2>Counter : 1</h2>
+</body>
+</html>
