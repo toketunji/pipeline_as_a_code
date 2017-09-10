@@ -12,10 +12,10 @@ endif
 #AWS_SECRET_KEY = cxbfNEbnYnwPUIcYoDAcrWBbSK16vSlMBxHrTKr2
 
 build-app: setup
-	echo "build world"
+	echo "build world."
 
 test-app: setup
-	echo "test world"
+	echo "test world."
 
 deploy-app: setup
 	echo "deploy world"

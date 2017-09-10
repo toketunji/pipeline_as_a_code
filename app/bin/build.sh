@@ -1,1 +1,1 @@
-echo "app build successfull"
+echo "app built successfully"
