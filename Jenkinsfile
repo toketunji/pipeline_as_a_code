@@ -36,7 +36,7 @@ environment {
 	      ansiColor('xterm') {
                 sh  """
  		    cd terraform
-                    ${TERRAFORM_CMD} init -backend=true -input=false
+                    ${TERRAFORM_CMD} plan -backend=true -input=false
                     """
               }
             }
