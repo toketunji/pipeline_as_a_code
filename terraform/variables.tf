@@ -31,7 +31,9 @@ variable "app_name" {
   default = "JENKINS_PIPELINE"
 }
 
-variable "ec2_key"            {}
+variable "key_name"     {
+  default = "JenkinsKey"
+}
 
 
 ##Jenkins varibles
