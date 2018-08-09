@@ -15,10 +15,12 @@ environment {
             }
           }
           stage('pull latest light terraform image') {
-            steps {
+	    steps {
+ 	      withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {	
                 sh  """
                     sudo docker pull hashicorp/terraform:light
                     """
+             }
             }
           }
           stage('Init') {
