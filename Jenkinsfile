@@ -25,11 +25,13 @@ environment {
           }
           stage('Init') {
             steps {
-	      ansiColor('xterm') {
+              ansiColor('xterm') {
+               withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {
                 sh  """
                     cd terraform
                     ${TERRAFORM_CMD} init -backend=true -input=false
                     """
+               }
               }
             }
           }
