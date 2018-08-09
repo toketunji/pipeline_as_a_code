@@ -5,7 +5,7 @@ pipeline {
         }
     }
 environment {
-    TERRAFORM_CMD = 'sudo docker run --network host -w /app -v /root/.aws:/root/.aws -v /root/.ssh:/root/.ssh -v "${WORKSPACE}/CreateJenkins":/app hashicorp/terraform:light'
+    TERRAFORM_CMD = 'sudo docker run --network host -w /app -v /root/.aws:/root/.aws -v /root/.ssh:/root/.ssh -v "${WORKSPACE}":/app hashicorp/terraform:light'
 
     }
       	stages {
@@ -38,21 +38,25 @@ environment {
           stage('Plan') {
             steps {
 	      ansiColor('xterm') {
+               withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {
                 sh  """
  		    cd terraform
                     ${TERRAFORM_CMD} plan -backend=true -input=false
                     """
+		}
               }
             }
           }  
           stage('Apply') {
             steps {
 	      ansiColor('xterm') {
+               withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {
                 sh  """
 		    cd terraform
                     ${TERRAFORM_CMD} apply -lock=false -input=false tfplan
                     """
-	        }
+		}                
+	       }
               }
           }
       }
