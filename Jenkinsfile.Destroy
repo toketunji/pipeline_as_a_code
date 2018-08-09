@@ -15,27 +15,33 @@ environment {
           }
           stage('pull latest light terraform image') {
             steps {
+              withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {
                 sh  """
                     sudo docker pull hashicorp/terraform:light
                     """
+             }
             }
           }
           stage('Init') {
             steps {
 	      ansiColor('xterm') {
+	       withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {
                 sh """
                     ${TERRAFORM_CMD} init -backend=true -input=false
 		    """
               }
+             }
             }
           }
 	  stage('Destroy') {
 	    steps {
               ansiColor('xterm') {
+                withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {
 		  sh """
                       ${TERRAFORM_CMD} destroy -auto-approve -input=false
                       """
                   }
+               }
               }
 	    }
       }
