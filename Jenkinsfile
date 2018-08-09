@@ -1,34 +1,55 @@
-#!/usr/bin/env groovy
+pipeline {
+    agent {
+        node {
+            label 'slaveJENKINS'
+        }
+    }
+environment {
+    TERRAFORM_CMD = 'sudo docker run --network host -w /app -v /root/.aws:/root/.aws -v /root/.ssh:/root/.ssh -v "${WORKSPACE}/terraform":/app hashicorp/terraform:light'
 
-/*
-Description:
-This Jenkinsfile contains one 'stage', in which it performs several actions
-on any Jenkins slave
-*/
-
-// need to ensure the docker tag used in the Makefile is lowercase
-env.DOCKER_TAG = BUILD_TAG.toLowerCase()
-
-node {
-  // Checkout the repository branch/tag/commit which triggered this job into the
-  // Jenkins node workspace
-  stage('Build') {
-    checkout scm
-
-    // Run the Makefile steps
-    sh 'make build-app'
-  }
-  stage('test') {
-    checkout scm
-
-    // Run the Makefile steps
-    sh 'make test-app'
-  }
-  stage('deploy') {
-    checkout scm
-
-    // Run the Makefile steps
-    sh 'make deploy-app'
-  }
+    }
+      	stages {
+          stage('checkout repo') {
+            steps {
+              git url: 'https://github.com/toketunji/pipeline_as_a_code.git'
+            }
+          }
+          stage('pull latest light terraform image') {
+            steps {
+                sh  """
+                    sudo docker pull hashicorp/terraform:light
+                    """
+            }
+          }
+          stage('Init') {
+            steps {
+	      ansiColor('xterm') {
+                sh  """
+                    cd terraform
+                    ${TERRAFORM_CMD} init -backend=true -input=false
+                    """
+              }
+            }
+          }
+          stage('Plan') {
+            steps {
+	      ansiColor('xterm') {
+                sh  """
+ 		    cd terraform
+                    ${TERRAFORM_CMD} init -backend=true -input=false
+                    """
+              }
+            }
+          }  
+          stage('Apply') {
+            steps {
+	      ansiColor('xterm') {
+                sh  """
+		    cd terraform
+                    ${TERRAFORM_CMD} apply -lock=false -input=false tfplan
+                    """
+	        }
+              }
+          }
+      }
 }
-
