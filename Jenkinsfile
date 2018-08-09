@@ -41,7 +41,7 @@ environment {
                withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {
                 sh  """
  		    cd terraform
-                    ${TERRAFORM_CMD} plan -backend=true -input=false
+                    ${TERRAFORM_CMD} plan -out=tfplan -input=false
                     """
 		}
               }
