@@ -1,0 +1,42 @@
+pipeline {
+    agent {
+        node {
+            label 'slaveJENKINS'
+        }
+    }
+environment {
+    TERRAFORM_CMD = 'sudo docker run --network host -w /app -v /root/.aws:/root/.aws -v /root/.ssh:/root/.ssh -v "${WORKSPACE}/terraform":/app hashicorp/terraform:light'
+    }
+      	stages {
+          stage('checkout repo') {
+            steps {
+              git url: 'https://github.com/toketunji/pipeline_as_a_code.git'
+            }
+          }
+          stage('pull latest light terraform image') {
+            steps {
+                sh  """
+                    sudo docker pull hashicorp/terraform:light
+                    """
+            }
+          }
+          stage('Init') {
+            steps {
+	      ansiColor('xterm') {
+                sh """
+                    ${TERRAFORM_CMD} init -backend=true -input=false
+		    """
+              }
+            }
+          }
+	  stage('Destroy') {
+	    steps {
+              ansiColor('xterm') {
+		  sh """
+                      ${TERRAFORM_CMD} destroy -auto-approve -input=false
+                      """
+                  }
+              }
+	    }
+      }
+}
