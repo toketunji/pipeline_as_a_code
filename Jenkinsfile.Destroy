@@ -38,7 +38,7 @@ environment {
               ansiColor('xterm') {
                 withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {
 		  sh """
-                      ${TERRAFORM_CMD} destroy -auto-approve -input=false
+                      ${TERRAFORM_CMD} destroy -force
                       """
                   }
                }
